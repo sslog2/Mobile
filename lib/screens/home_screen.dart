@@ -28,18 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
       filmes = data;
     });
   }
-
-  void _showGrupo() {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text("Grupo"),
-        content: Text("Integrantes: Matheus Farias, Marcio Souto, José Liedson, Maria Clara."),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text("OK"))],
-      ),
-    );
-  }
-
   void _menuAction(String value, Filme filme) {
     if (value == 'exibir') {
       Navigator.push(context, MaterialPageRoute(builder: (_) => DetalheScreen(filme: filme)));
@@ -47,15 +35,54 @@ class _HomeScreenState extends State<HomeScreen> {
       Navigator.push(context, MaterialPageRoute(builder: (_) => EditarScreen(filme: filme))).then((_) => _loadFilmes());
     }
   }
+  void _showOptions(BuildContext context, Filme filme) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.visibility),
+                title: const Text('Exibir Dados'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _menuAction('exibir', filme);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.edit),
+                title: const Text('Alterar'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _menuAction('alterar', filme);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+  void _showGrupo() {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("Grupo"),
+        content: const Text("Integrantes: \nJosé Matheus Mendonça Farias\nMárcio Souto Maior Sousa\nJosé Liedson da Silva\nMaria Clara Lau Santos"),
+        actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text("OK"))],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Filmes'),
-        actions: [
-          IconButton(icon: Icon(Icons.info), onPressed: _showGrupo),
-        ],
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
+        title: const Text('Filmes', style: TextStyle(fontWeight: FontWeight.bold)),
+        actions: [IconButton(icon: const Icon(Icons.info), onPressed: _showGrupo)],
       ),
       body: ListView.builder(
         itemCount: filmes.length,
@@ -63,7 +90,13 @@ class _HomeScreenState extends State<HomeScreen> {
           final filme = filmes[index];
           return Dismissible(
             key: Key(filme.id?.toString() ?? index.toString()),
-            background: Container(color: Colors.red, alignment: Alignment.centerLeft, padding: EdgeInsets.only(left: 20), child: Icon(Icons.delete, color: Colors.white)),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              color: Colors.red,
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.only(right: 20),
+              child: const Icon(Icons.delete, color: Colors.white),
+            ),
             onDismissed: (_) async {
               if (filme.id != null) {
                 await DBHelper().deleteFilme(filme.id!);
@@ -72,15 +105,14 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: FilmeCard(
               filme: filme,
-              onTap: () => _menuAction('exibir', filme),
-              onLongPress: () => _menuAction('alterar', filme),
+              onTap: () => _showOptions(context, filme),
             ),
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => CadastroScreen())).then((_) => _loadFilmes()),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

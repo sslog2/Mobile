@@ -57,7 +57,16 @@ class _EditarScreenState extends State<EditarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Editar Filme')),
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
+        title: Text(
+          'Editar Filme',
+          style: TextStyle(
+              fontWeight: FontWeight.bold
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
