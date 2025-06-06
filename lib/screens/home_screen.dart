@@ -7,6 +7,8 @@ import 'editar_screen.dart';
 import '../../widgets/filme_card.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -32,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (_) => AlertDialog(
         title: Text("Grupo"),
-        content: Text("Integrantes: Matheus Farias, Marcio Souto, Liedson, Maria Clara."),
+        content: Text("Integrantes: Matheus Farias, Marcio Souto, José Liedson, Maria Clara."),
         actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text("OK"))],
       ),
     );

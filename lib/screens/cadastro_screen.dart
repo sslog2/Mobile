@@ -5,6 +5,8 @@ import '../../database/db_helper.dart';
 import '../../utils/faixa_etaria.dart';
 
 class CadastroScreen extends StatefulWidget {
+  const CadastroScreen({super.key});
+
   @override
   _CadastroScreenState createState() => _CadastroScreenState();
 }

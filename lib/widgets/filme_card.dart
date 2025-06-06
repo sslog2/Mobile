@@ -8,11 +8,11 @@ class FilmeCard extends StatelessWidget {
   final VoidCallback? onLongPress;
 
   const FilmeCard({
-    Key? key,
+    super.key,
     required this.filme,
     this.onTap,
     this.onLongPress,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import '../../utils/faixa_etaria.dart';
 
 class EditarScreen extends StatefulWidget {
   final Filme filme;
-  EditarScreen({required this.filme});
+  const EditarScreen({super.key, required this.filme});
   @override
   _EditarScreenState createState() => _EditarScreenState();
 }

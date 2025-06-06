@@ -3,7 +3,7 @@ import '../../models/filme.dart';
 
 class DetalheScreen extends StatelessWidget {
   final Filme filme;
-  const DetalheScreen({required this.filme});
+  const DetalheScreen({super.key, required this.filme});
 
   @override
   Widget build(BuildContext context) {

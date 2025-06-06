@@ -9,6 +9,8 @@ void main() async {
 }
 
 class FilmeApp extends StatelessWidget {
+  const FilmeApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
