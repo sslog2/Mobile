@@ -1,62 +1,87 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../models/filme.dart';
 
 class FilmeCard extends StatelessWidget {
   final Filme filme;
   final VoidCallback? onTap;
-  final VoidCallback? onLongPress;
 
   const FilmeCard({
     Key? key,
     required this.filme,
     this.onTap,
-    this.onLongPress,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: ListTile(
-        onTap: onTap,
-        onLongPress: onLongPress,
-        leading: Image.network(
-          filme.imagemUrl,
-          width: 60,
-          height: 60,
-          fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => Icon(Icons.broken_image, size: 40),
-        ),
-        title: Text(
-          filme.titulo,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('${filme.genero} • ${filme.ano}'),
-            RatingBarIndicator(
-              rating: filme.pontuacao,
-              itemBuilder: (context, index) => Icon(Icons.star, color: Colors.amber),
-              itemCount: 5,
-              itemSize: 18.0,
-              direction: Axis.horizontal,
-            ),
-          ],
-        ),
-        trailing: PopupMenuButton<String>(
-          onSelected: (value) {
-            if (value == 'exibir' && onTap != null) {
-              onTap!();
-            } else if (value == 'alterar' && onLongPress != null) {
-              onLongPress!();
-            }
-          },
-          itemBuilder: (context) => [
-            PopupMenuItem(value: 'exibir', child: Text('Detalhe')),
-            PopupMenuItem(value: 'alterar', child: Text('Alterar')),
-          ],
+    final estiloSubtexto = GoogleFonts.poppins(
+      fontSize: 12,
+      color: Colors.black54,
+    );
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        elevation: 4,
+        clipBehavior: Clip.antiAlias,
+        child: SizedBox(
+          height: 180,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 120,
+                child: Image.network(
+                  filme.imagemUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => const Center(
+                    child: Icon(Icons.movie_creation_outlined, color: Colors.grey, size: 40),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              filme.titulo,
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(filme.genero, style: estiloSubtexto),
+                            const SizedBox(height: 4),
+                            Text(filme.duracao, style: estiloSubtexto),
+                          ],
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: RatingBarIndicator(
+                          rating: filme.pontuacao,
+                          itemBuilder: (context, index) => const Icon(Icons.star, color: Colors.amber),
+                          itemCount: 5,
+                          itemSize: 20.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
