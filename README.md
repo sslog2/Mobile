@@ -1,48 +1,60 @@
 # Mobile
 
+## Integrantes
+
+- José Matheus Mendonça Farias
+- Márcio Souto Maior Sousa
+- José Liedson da Silva
+- Maria Clara Lau Santos
+
+---
+
 ## Como rodar o projeto Flutter
 
-1. Instale o Flutter SDK: https://docs.flutter.dev/get-started/install
-2. Instale o Android Studio (para emulador Android) ou Xcode (para iOS/macOS).
-3. No terminal, execute:
+### 1. Pré-requisitos
+
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) instalado
+- Android Studio (para emulador Android) **ou** Xcode (para iOS/macOS)
+- (Opcional) Visual Studio Code ou outro editor de sua preferência
+
+### 2. Instale as dependências
+
+No terminal, execute:
 
 ```
 flutter pub get
 ```
 
+### 3. Execute o projeto
+
+Para rodar no emulador ou dispositivo físico:
+
 ```
 flutter run
 ```
-
-4. Para rodar no Windows/Linux/macOS:
-
-```
-flutter run -d windows   # ou linux, macos
-```
-
-5. Para rodar na web:
-
-```
-flutter run -d chrome
-```
+---
 
 ## Plugins utilizados
 
-- hive
-- hive_flutter
-- flutter_rating_bar
+- [hive](https://pub.dev/packages/hive)
+- [hive_flutter](https://pub.dev/packages/hive_flutter)
+- [flutter_rating_bar](https://pub.dev/packages/flutter_rating_bar)
+- [http](https://pub.dev/packages/http) (para requisições HTTP)
+- [path_provider](https://pub.dev/packages/path_provider) (usado pelo Hive)
 
-### Para gerar os adapters do Hive:
+### Gerando os adapters do Hive
+
+Sempre que criar ou alterar um model anotado com HiveType/HiveField, gere os adapters com:
 
 ```
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-### Outros plugins úteis
-
-- http (para requisições HTTP)
-- path_provider (usado pelo hive)
-
 ---
 
-Se precisar de mais detalhes, consulte a documentação oficial do Flutter ou os arquivos do projeto.
+## Dicas e documentação
+
+- Consulte a [documentação oficial do Flutter](https://docs.flutter.dev/) para mais detalhes.
+- Veja os arquivos do projeto para exemplos de uso dos plugins e organização do código.
+
+---
