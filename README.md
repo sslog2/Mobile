@@ -59,5 +59,5 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 ---
 <div align="center">
-<img src="https://github.com/user-attachments/assets/fe00045b-6bc9-4ffc-a47d-68df75ace6db" width="1000px" />
+<img src="https://github.com/user-attachments/assets/7ba9522f-3476-4b6c-9bff-a4ddc08e3a0e" width="1000px" />
 </div>
