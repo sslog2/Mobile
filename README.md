@@ -58,3 +58,6 @@ flutter pub run build_runner build --delete-conflicting-outputs
 - Veja os arquivos do projeto para exemplos de uso dos plugins e organização do código.
 
 ---
+<div align="center">
+<img src="https://github.com/user-attachments/assets/fe00045b-6bc9-4ffc-a47d-68df75ace6db" width="1000px" />
+</div>
